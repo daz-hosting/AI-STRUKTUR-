@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat AI</title>
+  <style>
+    body { background: #000; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+    .chat-box { width: 100%; max-width: 600px; background: #111; padding: 10px; border-radius: 10px; height: 70vh; overflow-y: auto; }
+    .msg { margin: 10px 0; }
+    .msg.user { color: #4af; }
+    .msg.assistant { color: #4f4; }
+    input, button { padding: 10px; font-size: 16px; }
+    .row { display: flex; width: 100%; max-width: 600px; margin-top: 10px; }
+    input { flex: 1; border: none; border-radius: 10px 0 0 10px; background: #222; color: white; }
+    button { background: #06f; color: white; border: none; border-radius: 0 10px 10px 0; }
+  </style>
+</head>
+<body>
+  <h1>Chat AI</h1>
+  <div id="chat" class="chat-box"></div>
+  <div class="row">
+    <input id="input" placeholder="Say something..." />
+    <button onclick="sendMsg()">Send</button>
+  </div>
+  <script>
+    const chat = document.getElementById('chat');
+    const input = document.getElementById('input');
+    const messages = [];
+
+    function addMsg(role, content) {
+      const div = document.createElement('div');
+      div.className = `msg ${role}`;
+      div.textContent = `${role === 'user' ? 'You' : 'AI'}: ${content}`;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    async function sendMsg() {
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      messages.push({ role: 'user', content: text });
+      addMsg('user', text);
+      addMsg('assistant', 'Typing...');
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages })
+      });
+      const data = await res.json();
+      chat.lastChild.remove();
+      messages.push({ role: 'assistant', content: data.answer });
+      addMsg('assistant', data.answer);
+    }
+  </script>
+</body>
+</html>
