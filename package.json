@@ -1,12 +1,18 @@
 {
-  "name": "chat-ai-simple",
+  "name": "ai-gemini-web",
   "version": "1.0.0",
-  "type": "module",
+  "description": "Chat AI dengan 2 model: Concise AI & Gemini Scraper",
+  "main": "index.js",
   "scripts": {
-    "dev": "vercel dev"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "crypto": "*",
-    "uuid": "^9.0.0"
+    "axios": "^1.6.8",
+    "uuid": "^9.0.1",
+    "next": "14.1.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   }
 }
