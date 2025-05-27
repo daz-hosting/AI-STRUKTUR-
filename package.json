@@ -1,0 +1,29 @@
+{
+  "name": "tiktok-downloader",
+  "version": "1.0.0",
+  "description": "TikTok Video & Music Downloader using Next.js and FastRestAPI",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "8.56.0",
+    "eslint-config-next": "14.2.3"
+  },
+  "keywords": [
+    "nextjs",
+    "tiktok",
+    "downloader",
+    "video",
+    "music"
+  ],
+  "author": "NamaKamu",
+  "license": "MIT"
+}
